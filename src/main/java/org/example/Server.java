@@ -15,8 +15,15 @@ public class Server {
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))){
             System.out.println("New connection accepted");
+            out.println("Write your name");
             final String name = in.readLine();
-            out.println(String.format("Hi %s, your port is %d", name, clientSocket.getPort()));
+            out.println("Are you a child(yes/no)");
+            final String isChild = in.readLine();
+            if (isChild.equals("yes")){
+                out.println(String.format("Welcome to the kids area, %s! Let's play!", name));
+            } else {
+                out.println(String.format("Welcome to the adult zone, %s! Have a good rest, or a good working day!", name));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
